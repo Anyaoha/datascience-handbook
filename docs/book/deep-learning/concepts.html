@@ -1,0 +1,424 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Deep Learning &#8212; Data Science Hand.. 0.0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/bootstrap-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/style.css" />
+    <link rel="stylesheet" href="../../_static/css/style.css" type="text/css" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../../_static/js/jquery-1.12.4.min.js "></script>
+<script type="text/javascript" src="../../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../../_static/bootstrap-3.4.1/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../../_static/bootstrap-sphinx.js "></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../index.html">
+          Handbook</a>
+        <span class="navbar-text navbar-version pull-left"><b></b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"></ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Section <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Deep Learning</a><ul>
+<li><a class="reference internal" href="#feed-forward-neural-networks">Feed Forward Neural Networks</a></li>
+<li><a class="reference internal" href="#activation-functions">Activation Functions</a></li>
+<li><a class="reference internal" href="#dropout">Dropout</a></li>
+<li><a class="reference internal" href="#epoch">Epoch</a></li>
+<li><a class="reference internal" href="#gradient-descent">Gradient Descent</a></li>
+<li><a class="reference internal" href="#batch-gradient-descent">Batch Gradient Descent</a></li>
+<li><a class="reference internal" href="#stochastic-gradient-descent">Stochastic Gradient Descent</a></li>
+<li><a class="reference internal" href="#mini-batch-gradient-descent">Mini-batch Gradient Descent</a></li>
+<li><a class="reference internal" href="#stochastic-gradient-descent-vs-batch-gradient-descent">Stochastic Gradient Descent vs. Batch Gradient Descent</a></li>
+<li><a class="reference internal" href="#stochastic-weighting-average">Stochastic Weighting Average</a></li>
+<li><a class="reference internal" href="#softmax">Softmax</a></li>
+<li><a class="reference internal" href="#learning-rate">Learning Rate</a></li>
+<li><a class="reference internal" href="#optimizers">Optimizers</a></li>
+<li><a class="reference internal" href="#batch-normalization">Batch Normalization</a></li>
+<li><a class="reference internal" href="#overfitting">Overfitting</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <div class="section" id="deep-learning">
+<h1>Deep Learning<a class="headerlink" href="#deep-learning" title="Permalink to this headline"></a></h1>
+<hr class="docutils" />
+<div class="section" id="feed-forward-neural-networks">
+<h2>Feed Forward Neural Networks<a class="headerlink" href="#feed-forward-neural-networks" title="Permalink to this headline"></a></h2>
+<p><img alt="image" src="../../_images/dnn.png" /></p>
+<p><strong><span class="label label-success">Steps</span></strong></p>
+<ul class="simple">
+<li><p><strong>Feed Forward:</strong> takes an input and passes it through multiple layers of hidden
+neurons and outputs a prediction representing the combined input of all the
+neurons.</p></li>
+<li><p><strong>Input Layer:</strong> consists of the input data which is passed to
+the first hidden layer in the network. Each layer in the network consists of
+a series of neurons.</p>
+<ul>
+<li><p>A <code class="docutils literal notranslate"><span class="pre">Neuron</span></code> is the weighted sum of the inputs plus bias and then feeds the sum
+through a non-linear activation function.</p></li>
+<li><p>The outputs of the neurons are then passed to the next layer.</p></li>
+<li><p>This process is repeated for each layer in the network until the output layer.</p></li>
+</ul>
+</li>
+<li><p><strong>Hidden Layers:</strong> resides in-between input and output layers and can consist
+of ‘n’ layers (hyperparameter to tune for).</p>
+<ul>
+<li><p>As the number of hidden layers in the network increases, so does the
+training time.</p></li>
+</ul>
+</li>
+<li><p><strong>Output layer:</strong>: produces the class label or target, depending whether this
+is a classification or regression task.</p></li>
+</ul>
+<p><strong>Goal</strong></p>
+<ul class="simple">
+<li><p>The objective is to <code class="docutils literal notranslate"><span class="pre">minimize</span></code> the Loss Function.</p></li>
+<li><p>Where the loss function quantifies how “good” or “bad” a given model is in
+classifying the input  data</p></li>
+</ul>
+<p><strong>Backpropagation</strong>:</p>
+<ul class="simple">
+<li><p>Back prop is the method to update the weights in the neural network by taking
+into account the actual output and the desired output.</p></li>
+<li><p>The backward pass adjusts the weights and biases in the network
+to optimize the cost function and minimize the loss function.</p></li>
+<li><p>The derivative with respect to the weights is computed using chain rule.</p></li>
+</ul>
+</div>
+<div class="section" id="activation-functions">
+<h2>Activation Functions<a class="headerlink" href="#activation-functions" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p>Functions used at the end of a hidden unit to introduce non-linear
+complexities to the model.</p></li>
+<li><p><strong>Reference</strong>: Andrej Karpathy |CS231n Winter 2016: Lectures on Convolutional
+Neural Nets</p>
+<ul>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=NfnWJUyUJYU&amp;list=PLkt2uSq6rBVctENoVBg1TpCC7OQi31AlC">Link</a></p></li>
+</ul>
+</li>
+</ul>
+<p><strong>Sigmoid Function (Logistic Function)</strong></p>
+<ul class="simple">
+<li><p>In order to map predicted values to probabilities, we use the sigmoid
+function. The function maps  any real value into another value between 0 and</p>
+<ol class="simple">
+<li><p>In machine learning, we use sigmoid to map predictions to probabilities.</p></li>
+</ol>
+</li>
+</ul>
+<p><img alt="image" src="../../_images/sigmoid.png" /></p>
+<p><strong>Tanh</strong></p>
+<p><img alt="image" src="../../_images/tanh.png" /></p>
+<p><strong>Relu</strong></p>
+<p><img alt="image" src="../../_images/relu.png" /></p>
+<p><strong>Leaky Relu</strong></p>
+<p><img alt="image" src="../../_images/leaky_relu.png" /></p>
+</div>
+<div class="section" id="dropout">
+<h2>Dropout<a class="headerlink" href="#dropout" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p>Is a technique meant to prevent overfitting the training data by dropping out
+units in a neural network. In practice, neurons are either dropped with
+probability.</p></li>
+</ul>
+</div>
+<div class="section" id="epoch">
+<h2>Epoch<a class="headerlink" href="#epoch" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p>Epoch is a term used to refer to one iteration where the model sees the whole
+training set to update its weights.</p></li>
+</ul>
+</div>
+<div class="section" id="gradient-descent">
+<h2>Gradient Descent<a class="headerlink" href="#gradient-descent" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p>Gradient descent is an <code class="docutils literal notranslate"><span class="pre">iterative</span> <span class="pre">algorithm</span></code>, that starts from a random point on
+a function and travels down its slope in steps until it reaches the lowest
+point of that function.</p></li>
+<li><p>Gradient Descent involves calculating the <code class="docutils literal notranslate"><span class="pre">gradient</span></code> of the target function.</p></li>
+<li><p>Optimization algorithm used to minimize the loss function by iteratively
+moving in the direction of steepest descent as defined by the negative of
+the gradient.</p>
+<ul>
+<li><p><strong>Derivative</strong>: Slope or curvature of a target function with respect to
+specific input values to the function.</p></li>
+<li><p><strong>Gradient</strong>: Vector of partial derivatives of a target function with
+respect to input variables.</p></li>
+<li><p><strong>Step Size:</strong> Learning rate or alpha, a hyperparameter used to control
+how much to change each input variable with respect to the gradient.</p></li>
+</ul>
+</li>
+<li><p>Shape of the loss function:</p>
+<ul>
+<li><p><strong>Linear Models:</strong> convex shape</p></li>
+<li><p><strong>Non-Linear Models:</strong> non-convex optimization (needs GPU)</p></li>
+</ul>
+</li>
+</ul>
+<p><img alt="image" src="../../_images/gradient_descent.png" /></p>
+<p><strong><span class="label label-success">Steps</span></strong></p>
+<ul class="simple">
+<li><p>Calculate gradients of the loss/error function, then updating existing
+parameters in response to the gradients.</p></li>
+<li><p>This new gradient tells us the slope of our cost function at our current
+position and the direction we should move to update our parameters.</p></li>
+<li><p>The size for updating the weights is controlled by the learning rate.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">step</span> <span class="pre">size</span> <span class="pre">=</span> <span class="pre">gradient</span> <span class="pre">*</span> <span class="pre">learning</span> <span class="pre">rate</span></code></p></li>
+</ul>
+</li>
+<li><p>Calculate the new parameters as:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">new</span> <span class="pre">params</span> <span class="pre">=</span> <span class="pre">old</span> <span class="pre">params</span> <span class="pre">-step</span> <span class="pre">size</span></code></p></li>
+</ul>
+</li>
+<li><p>Repeat until convergence (e.g. gradient is small enough to stop).</p></li>
+</ul>
+<p><strong><span class="label label-warning">Disadvantages</span></strong></p>
+<ul class="simple">
+<li><p>For large datasets, the gradient descent algorithm can be slow.</p></li>
+<li><p>An alternative is to use a stochastic gradient descent algorithm (SGD) which
+is faster and more efficient.</p></li>
+</ul>
+</div>
+<div class="section" id="batch-gradient-descent">
+<h2>Batch Gradient Descent<a class="headerlink" href="#batch-gradient-descent" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p>Same as vanilla gradient descent and computes the gradient of the cost
+function with respect to the parameters for the entire dataset.</p></li>
+<li><p>During batch gradient descent, the algorithm has to scan every single
+instance of the training set before taking a single step, which can take
+longer to compute, especially for larger datasets.</p></li>
+<li><p>Batch Gradient Descent is not often used in practice as it’s simply too
+computationally expensive.</p></li>
+</ul>
+</div>
+<div class="section" id="stochastic-gradient-descent">
+<h2>Stochastic Gradient Descent<a class="headerlink" href="#stochastic-gradient-descent" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p>Stochastic gradient descent (SGD) is the dominant method used to train deep
+learning models.</p></li>
+<li><p>While selecting data points at each step to calculate the derivatives, SGD
+<code class="docutils literal notranslate"><span class="pre">randomly</span></code> picks <em>one data point</em> from the whole data set at each iteration.</p></li>
+<li><p>Often the case, SGD performs much faster than batch gradient descent as moves
+closer to the minimum quicker.</p></li>
+<li><p>Given that SGD computes the gradient using a single sample. - single samples
+are really noisy.</p>
+<ul>
+<li><p>Fluctuation enables it to jump to new and potentially better local
+minima and converge quicker.</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="mini-batch-gradient-descent">
+<h2>Mini-batch Gradient Descent<a class="headerlink" href="#mini-batch-gradient-descent" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p>Takes the best of both worlds (batch and stochastic) and performs an update
+for every mini-batch of <code class="docutils literal notranslate"><span class="pre">n</span></code> training examples.</p></li>
+<li><p>Mini-batches tend to average a little of the noise out relatively to using
+just SGD.</p></li>
+<li><p>A good balance is struck when the mini-batch size is small enough to avoid
+some of the poor local minima, but large enough that it doesn’t avoid the
+global minima or better-performing local minima.</p></li>
+</ul>
+</div>
+<div class="section" id="stochastic-gradient-descent-vs-batch-gradient-descent">
+<h2>Stochastic Gradient Descent vs. Batch Gradient Descent<a class="headerlink" href="#stochastic-gradient-descent-vs-batch-gradient-descent" title="Permalink to this headline"></a></h2>
+<p><img alt="image" src="../../_images/sgd_bgd.png" /></p>
+<p><a class="reference external" href="https://www.geeksforgeeks.org/difference-between-batch-gradient-descent-and-stochastic-gradient-descent/">Reference</a></p>
+</div>
+<div class="section" id="stochastic-weighting-average">
+<h2>Stochastic Weighting Average<a class="headerlink" href="#stochastic-weighting-average" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p>Stochastic weighting is a technique that allows us to update the weights of
+the network in a way that is more efficient than the traditional way.</p></li>
+<li><p><strong>Reference</strong>: https://pytorch.org/blog/stochastic-weight-averaging-in-pytorch/</p></li>
+</ul>
+</div>
+<div class="section" id="softmax">
+<h2>Softmax<a class="headerlink" href="#softmax" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p>In a neural network, the raw predictions are produced from the last layer of
+the network. The softmax function converts these values to probabilities for
+multi-class labels.</p></li>
+</ul>
+<p><img alt="image" src="../../_images/softmax_sigmoid.png" /></p>
+</div>
+<div class="section" id="learning-rate">
+<h2>Learning Rate<a class="headerlink" href="#learning-rate" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p>Controls how much to change the model in response to the estimated error each
+time the model weights  are updated or can be thought of as the size of the
+step size taken when performing gradient descent.</p></li>
+<li><p><strong>High Learning Rate:</strong> If the learning rate is set too high, it can cause
+undesirable divergent  behavior in your loss function
+Large LR puts the model at risk of exceeding the minima so it will not be
+able to converge: what is  known as <code class="docutils literal notranslate"><span class="pre">EXPLODING</span> <span class="pre">GRADIENT</span></code>.</p></li>
+<li><p><strong>Low Learning Rate:</strong> If the LR is set too low, training will progress very
+slowly as you are  making very tiny updates to the weights in your network. A
+smaller LR will increase the risk of overfitting.</p></li>
+</ul>
+<p><img alt="image" src="../../_images/learning_rate.png" /></p>
+<p><strong>Adaptive Learning Rates</strong></p>
+<ul class="simple">
+<li><p>(*) No manual tuning of the learning rate is required;</p></li>
+<li><p>(*) η is adjusted by the optimizer to perform larger or smaller updates
+depending on the importance  of the weight;</p></li>
+<li><p>In practice: decay learning rate over time.</p></li>
+</ul>
+</div>
+<div class="section" id="optimizers">
+<h2>Optimizers<a class="headerlink" href="#optimizers" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p><strong>Adam</strong>: optimization is a stochastic gradient descent method that is based
+on adaptive estimation  of first-order and second-order moments.</p></li>
+<li><p><strong>Adagrad</strong>: is an optimizer with parameter-specific learning rates, which
+are adapted relative to  how frequently a parameter gets updated during
+training. The more updates a parameter receives, the smaller the updates.</p></li>
+<li><p><strong>Adadelta</strong>: optimization is a stochastic gradient descent method that is
+based on adaptive learning rate per dimension to address two drawbacks:</p>
+<ul>
+<li><p>The continual decay of learning rates throughout training.</p></li>
+<li><p>The need for a manually selected global learning rate</p></li>
+</ul>
+</li>
+</ul>
+<p><img alt="image" src="../../_images/optimizers.png" /></p>
+</div>
+<div class="section" id="batch-normalization">
+<h2>Batch Normalization<a class="headerlink" href="#batch-normalization" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p>We normalize the input layer by adjusting and scaling the activations.</p></li>
+<li><p>This allows each layer of a network to learn by itself a little bit more
+independently of other layers.</p></li>
+<li><p>It also allows for a higher learning rate because batch normalization makes
+sure that there’s no activation that’s gone really high or really low.</p></li>
+<li><p>It reduces overfitting because it has a slight regularization effect as it
+adds some noise to each hidden layer’s activations.</p></li>
+<li><p>It works by normalizing the output of a previous activation layer by
+subtracting the batch mean and dividing by the batch standard deviation</p></li>
+<li><p>Therefore, batch normalization adds two trainable parameters to each layer,
+so the normalized output  is multiplied by a “standard deviation” parameter
+and add a “mean” parameter .</p></li>
+<li><p>BN usually done after a fully connected/convolutional layer and before a
+non-linearity layer and aims at allowing higher learning rates and reducing
+the strong dependence on initialization.</p></li>
+</ul>
+</div>
+<div class="section" id="overfitting">
+<h2>Overfitting<a class="headerlink" href="#overfitting" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p>Ways to address overfitting:</p>
+<ul>
+<li><p>Augmentation (e.g. images: flip/scale/rotate)</p></li>
+<li><p>Decrease batch size</p></li>
+<li><p>Add dropout rate</p></li>
+<li><p>Weight decay</p></li>
+<li><p>Early stopping</p></li>
+<li><p>Regularization</p></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="../../_sources/book/deep-learning/concepts.md.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2021, Trace Smith, Damon Resnick.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
